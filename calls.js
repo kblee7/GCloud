@@ -14,19 +14,6 @@ const usersApi = new platformClient.UsersApi();
 
 
 
-client.loginImplicitGrant(clientId, redirectUri, { state: state })
-  .then((data) => {
-    console.log(data);
-    // Do authenticated things
-  })
-  .catch((err) => {
-    // Handle failure response
-    console.log(err);
-  });
-
-
-
-
 
 // Set Genesys Cloud settings
 client.setEnvironment('apne2.pure.cloud');
