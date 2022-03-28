@@ -1,7 +1,7 @@
 /* globals Handlebars */
 
 // This client ID expects the redirect URL to be http://localhost:8080/
-const clientId = 'bd06e699-cbdb-4f9b-bf1c-7c6b7452bd12';
+const clientId = '3009a97e-671b-45af-88e1-525f6d498a8a';
 const redirectUri = window.location.href; //"http://localhost/"; //'http://localhost/';
 
 // Set Genesys Cloud objects
@@ -16,7 +16,7 @@ const usersApi = new platformClient.UsersApi();
 
 
 // Set Genesys Cloud settings
-client.setEnvironment('mypurecloud.com'); //apne2.pure.cloud');
+client.setEnvironment('apne2.pure.cloud'); //apne2.pure.cloud');
 client.setPersistSettings(true, 'test_app');
 
 // Set local vars
