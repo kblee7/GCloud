@@ -1,7 +1,7 @@
 /* globals Handlebars */
 
 // This client ID expects the redirect URL to be http://localhost:8080/
-const clientId = '3009a97e-671b-45af-88e1-525f6d498a8a';
+const clientId = '';
 const redirectUri = window.location.href; //"http://localhost/"; //'http://localhost/';
 
 // Set Genesys Cloud objects
