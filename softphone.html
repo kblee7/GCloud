@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Phone Test</title>
+    <script src="https://sdk-cdn.mypurecloud.com/javascript/latest/purecloud-platform-client-v2.min.js"></script>
+    <script src="./softphone3.js"></script>
+    <link type="text/css" rel="stylesheet" href="./softphone3.css">
+    </head>
+    <body>
+    <div id="scriptFrame">
+    </div>
+    <div id="softphoneFrame" draggable="false">
+      <div class="iframe__handle"></div>
+    </div>
+    <div class='content'>
+        <h1>PureCloud Embeddable Framework Example <button id="softphoneDisplay">View Softphone</button><button id="scriptDisplay">View ScriptWindow</button><button id="ctiLogout">CTI LOGOUT</button></h1>
+        <div class="actions">
+          <section class="pk__1">
+            <div id="myNotifications">
+              <div>Current presence: <span id="currentPresence"></span></div>
+              <label for="userStatus">Status : </label><input id="userStatus" type="text" value="waiting" readonly="true" />
+              <label for="myDetails">myDetails : </label><textarea id="myDetails" rows="5" ></textarea>
+              <label for="myPresence">myPresence : </label><textarea id="myPresence" rows="5" ></textarea>
+              <label for="myConversation">myConversation : </label><textarea id="myConversation" rows="5" ></textarea>
+            </div>
+            <div id="myParticipants">
+              <div>
+                <label for="myParticipant0">Participant0&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant0" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant0_state" type="text" readonly="true" />
+              </div>
+              <div>
+                <label for="myParticipant1">Participant1&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant1" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant1_state" type="text" readonly="true" />
+              </div>
+              <div>
+                <label for="myParticipant2">Participant2&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant2" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant2_state" type="text" readonly="true" />
+              </div>
+              <div>
+                <label for="myParticipant3">Participant3&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant3" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant3_state" type="text" readonly="true" />
+              </div>
+              <div>
+                <label for="myParticipant4">Participant4&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant4" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant4_state" type="text" readonly="true" />
+              </div>
+              <div>
+                <label for="myParticipant5">Participant5&#40;purpose&#38;state&#41; : </label><input class="input__myParticipant" id="myParticipant5" type="text" readonly="true" /><input class="input__myParticipant" id="myParticipant5_state" type="text" readonly="true" />
+              </div>
+            </div>
+          </section>
+            <h3>Actions</h3>
+            
+            <div class="action">
+                <h4 class="actionName">Click-to-Dial</h4>
+                <p>You can raise events from the main application to automatically place a call using the embedded client. <a id='clickToDial' >01043545557</a> </p>
+                <p><label for="clickToDialDest">OB by Queue : </label><input id="clickToDialDest" type="text" placeholder="Type Customer Phone Number"/><button id='clickToDial_byQueue' >Send</button></p>
+            </div>
+            <div class="action">
+                <h4 class="actionName">Make Calls</h4>
+                <p><label for="makeCallDest">Dest : </label><input id="makeCallDest" type="text" placeholder="Type Customer Phone Number"/><label for="makeCallId">Caller Number : </label><input id="makeCallId" type="text" value="07011112222" placeholder="Type Caller Number"/><label for="makeCallQueue">Queue Id : </label><input id="makeCallQueue" type="text" placeholder="Type Queue Id"/> <button id='makeCall' >Send</button> <button id='makeCall_API' >API Send</button></p>
+            </div>
+            <div class="action">
+                <h4 class="actionName">Set External Tag</h4>
+                <p><label for="externalTag">External Tag : </label><input id="externalTag" type="text" placeholder="Enter a string value (36)"/><button id='setExternalTag'>Set Tag</button></p>
+            </div>
+            <div class="action">
+                <h4 class="actionName">Get Agent Real ID</h4>
+                <p><label for="targetEmail">Target Email : </label><input id="targetEmail" type="text" placeholder="Type Target Email"/><button id="getRealId">Get Real ID</button></p>
+            </div>
+            <div class="action">
+                <h4 class="actionName">Get Agent Conversation Summury</h4>
+                <p><label for="targetRealId">Target Real ID : </label><input id="targetRealId" type="text" placeholder="Type Target Real Id"/><button id="getAgentConversationSummury">Get Agent Call Summury</button></p>
+                <textarea id="agentConverstionSummary"></textarea>
+            </div>
+            <div class="action">
+                <h4 class="actionName">Disconnect Partcipant & Set Wrap-up Code & Speak To Both</h4>
+                <p><label for="targetConversationId">conversationId : </label><input type="text" id="targetConversationId"><label for="targetParticipantId">participantId : </label><input type="text" id="targetParticipantId"></p>
+                <p><span>Transfer Disconnect : </span><button id="transferDisconnect">Transfer Disconnect</button></p>
+                <p><label for="wrapupCodeId">Wrap-up Code Id : </label><input type="text" id="wrapupCodeId"><button id="setWrapupCode">Set Wrap-up Code</button></p>
+                <p><span>Speak To Both - 3자 통화 : </span><button id="speakToBoth">speakToBoth</button></p>
+                <p><label for="addAttributeForTerminatedCallBody">add Attributes for Terminated Call : </label><textarea id="addAttributeForTerminatedCallBody">{"interactionId":"1234-1234-1234-1234","attributes": {"test1": "value1"}}</textarea> <button id="addAttributeForTerminatedCall">Send Data</button></p>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Update Interaction States</h4>
+                <p>Interaction.updateState allows you to update the state of an interaction. This configuration enables deeper integration with pickup, disconnect, hold, mute, and secure pause.</p>
+                <button class='callControl' id="pickupInteraction">pickup</button>
+                <button class='callControl' id="disconnectInteraction">disconnect</button>
+                <button class='callControl' id="holdInteraction">hold</button>
+                <button class='callControl' id="muteInteraction">mute</button>
+                <button class='callControl' id="securePauseInteraction">securePause</button>
+                <br />
+                <input id="transferDestAddress" type="text" placeholder="Type Dest Address" />
+                <select id='transferDestType'>
+                  <option value="address">address</option>
+                  <option value="userId">userId</option>
+                  <option value="queueId">queueId</option>
+                </select>
+                <button class='callControl' id="blindTransfer" name="transferBtn">blindTransfer</button>
+                <button class='callControl' id="consultTransfer" name="transferBtn">consultTransfer</button>
+                <button class='callControl' id="concludeTransfer" name="transferBtn">concludeTransfer</button>
+                <button class='callControl' id="transferBoth">bothTransfer</button>
+                <input id="uuidata" type="text" placeholder="uuidata" />
+                <button class='callControl' id="setUuiData">setUUIData</button>
+                <br />
+                <input id="transferSecFlowId" type="text" placeholder="SecFlowId" />
+                <input id="userData" type="text" placeholder="User Data" />
+                <button class='callControl' id="secureTransfer">secureSession</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Add Associations</h4>
+                <p>addAssociation allows you to update options for Name or Related To fields in the Interaction Log view. The selected option is sent to the embeddable framework when processCallLog is raised.</p>
+                <textarea id="associationPayload" rows="4">{"type":"contact", "id":"1234", "text":"Weather Line", "select": true}</textarea>
+                <button id="addAssociation" >Send Data</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Add Custom Attributes</h4>
+                <p>Interaction.addCustomAttributes allows you to add additional information to interactions and sync these attributes to call logs associated with these interactions. An example use case is to save the current state of an agent's workspace and transfer the workspace to a new agent.</p>
+                <textarea id="attributePayload" rows="4">{"interactionId":"1234-1234-1234-1234","attributes": {"exampleWorkspaceKey": "https://exampleworkspaceurl.com"}}</textarea>
+                <button id="addAttribute">Send Data</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Add Transfer Context</h4>
+                <p>addTransferContext allows agents to provide additional information when transferring interactions.</p>
+                <textarea id="transferContextPayload" rows="4">{"name": "Case: 1234 - Broken Phone","attributes": {"PT_TransferContext": "1234"}}</textarea>
+                <button id="addTransferContext">Send Data</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Contact Search Options <span id="searchText"></span></h4>
+                <p>contactSearch allows you to define which contacts the integration returns from an external CRM when agents search for names or phone numbers before making calls or transferring interactions.</p>
+                <textarea id="contactSearchPayload" rows="4">[{"type": "external", "name": "Weather Line", "phone":[{ "number":"(317) 222-2222", "label":"Cell"}]}]</textarea>
+            </div>
+            
+            <div class="action">
+                <h4 class="actionName">Update User Status</h4>
+                <p>User.updateStatus allows status management between PureCloud and third-party systems.</p>
+                <select id='statusDropDown'>
+                    <option value="AVAILABLE">Available</option>
+                    <option value="AWAY">Away</option>
+                    <option value="ON_QUEUE">On Queue</option>
+                </select>
+                <button id="updateUserStatus">Send Data</button>
+            </div>
+            
+            <div class="action">
+                <h4 class="actionName">Set User View</h4>
+                <p>User.setView sets the embedded client to a specific view when a user creates an interaction (makes a call, sends an email, or sends an SMS message). Available views: interactionList, callLog, newInteraction, callback, settings.</p>
+                <button class='views' id="view-interactionList">interactionList</button><button class='views' id="view-calllog">callLog</button><button class='views' id="view-newInteraction">newInteraction</button><button class='views' id="view-callback">callback</button><button class='views' id="view-settings">settings</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Set Audio Configuration for User Notifications</h4>
+                <p>User.Notification.setAudioConfiguration allows granular control over which interaction types play an audible alert when the interaction is alerting.</p>
+                <span>
+                        <input type="checkbox" id="audio-call" value="call" checked>Call
+                </span>
+                <span>
+                        <input type="checkbox" id="audio-email" value="email" checked>Email
+                </span>
+                <span>
+                        <input type="checkbox" id="audio-callback" value="callback" checked>Callback
+                </span>
+                <span>
+                        <input type="checkbox" id="audio-chat" value="chat" checked>Chat
+                </span>
+                <span>
+                        <input type="checkbox" id="audio-message" value="message" checked>Message
+                </span>
+                <span>
+                    <input type="checkbox" id="audio-voicemail" value="voicemail" checked>Voicemail
+                </span>
+                </br>
+                <button id="updateAudioConfiguration">Save</button>
+            </div>
+
+            <div class="action">
+                <h4 class="actionName">Custom User Notifications</h4>
+                <p>User.Notification.notifyUser lets you show custom messages to the user.</p>
+                <input id="customNotificationMessage" value='This is a message!'>
+                <select id='notificationType'>
+                    <option value="INFO">Info</option>
+                    <option value="SUCCESS">Success</option>
+                    <option value="WARNING">Warning</option>
+                    <option value="ERROR" selected=true>Error</option>
+                </select>
+
+                <select id='notificationTimeout'>
+                    <option value ="0" selected=true>No Timeout</option>
+                    <option value ="5000">5 seconds</option>
+                    <option value ="10000">10 seconds</option>
+                    <option value ="15000">15 seconds</option>
+                    <option value ="20000">20 seconds</option>
+                </select>
+                <button id="sendCustomNotification">Send Data</button>
+            </div>
+        </div>
+
+    <div class="events">
+        <h3>Events</h3>
+
+        <div class="event">
+                <h4 class="eventName">Screen Pop</h4>
+                <p>screenPop is raised for inbound alerting interactions.</p>
+                <textarea id="screenPopPayload" rows="5"></textarea>        
+        </div>
+
+        <div class="event">
+                <h4 class="eventName">Process Call Log</h4>
+                <p>processCallLog is raised for interactions when the interaction state is updated and there are pending changes to the Interaction Log view in the embedded client.</p>
+                <textarea id="processCallLogPayLoad" rows="5"></textarea>
+        </div>
+
+        <div class="event">
+            <h4 class="eventName">Open Call Log</h4>
+            <p>openCallLog is raised when the user clicks the arrow on the Interaction Log view in the embedded client.</p>
+            <textarea id="openCallLogPayLoad" rows="5"></textarea>
+    </div>
+    </div>
+
+    <div class="subscriptions">
+        <h3>Subscribe</h3>
+
+        <div class="subscription">
+            <h4 class="subscriptionName">Type: Interaction</h4>
+            <p>Subscribing to Interaction events allows you to make smart decisions based on an interaction's life cycle.</p>
+            <textarea id="interactionSubscriptionPayload" rows="5"></textarea>        
+        </div>
+
+        <div class="subscription">
+            <h4 class="subscriptionName">Type: UserAction</h4>
+            <p>Subscribing to UserAction events allows you to align the agent's interface outside of the embeddable framework with their current task.</p>
+            <textarea id="userActionSubscriptionPayload" rows="5"></textarea>        
+        </div>
+        <div class="subscription">
+            <h4 class="subscriptionName">Type: Notification</h4>
+            <p>Subscribing to Notification events allows contextual information such as when an interaction selection changed.</p>
+            <textarea id="notificationSubscriptionPayload" rows="5"></textarea>        
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
