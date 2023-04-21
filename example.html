@@ -4,10 +4,10 @@
     <script src='//code.jquery.com/jquery-1.11.2.min.js'></script>
     <script>
     // Implicit grant credentials
-    const CLIENT_ID = '--- Implicit Grant Client ID ---';
+    const CLIENT_ID = 'aefef33f-8f61-479d-8f42-2b534c5a7d76';
 
     // Genesys Cloud environment
-    const ENVIRONMENT = 'mypurecloud.com';
+    const ENVIRONMENT = 'apne2.pure.cloud';
     
     
     function getParameterByName(name) {
@@ -36,7 +36,7 @@
         var queryStringData = {
             response_type : "token",
             client_id : CLIENT_ID,
-            redirect_uri : "http://localhost:8085/oauth2/callback"
+            redirect_uri : "https://kblee7.github.io/GCloud/example.html"
         }
 
         window.location.replace(`https://login.${ENVIRONMENT}/oauth/authorize?` + jQuery.param(queryStringData));
